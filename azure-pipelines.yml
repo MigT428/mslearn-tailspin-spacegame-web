@@ -17,22 +17,14 @@ steps:
 - task: UseNode@1
   displayName: 'Use Node.js'
   inputs:
-    versionSpec: '18.x'  # Specify the Node.js version here
-
-- task: Cache@2
-  displayName: 'Cache npm modules'
-  inputs:
-    key: 'npm | "$(Agent.OS)" | package-lock.json'
-    restoreKeys: |
-      npm | "$(Agent.OS)"
-    path: ~/.npm
+    versionSpec: '16.x'
 
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
-    verbose: true  # Enable verbose logging for more details
+    verbose: true
 
-- script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
+- script: 'npx sass Tailspin.SpaceGame.Web/wwwroot --no-source-map'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
