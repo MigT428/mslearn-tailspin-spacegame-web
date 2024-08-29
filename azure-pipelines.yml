@@ -20,9 +20,11 @@ steps:
     versionSpec: '16.x'  # Specify the Node.js version here
 
 - task: Npm@1
-  displayName: 'Run npm install'
+  displayName: 'Run npm ci'
   inputs:
     verbose: true  # Enable verbose logging for more details
+    workingDirectory: 'mslearn-tailspin-spacegame-web'  # Directory where package-lock.json is located
+    custom: 'ci'
 
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
