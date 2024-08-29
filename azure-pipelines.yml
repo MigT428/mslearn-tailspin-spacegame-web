@@ -17,16 +17,15 @@ steps:
 - task: UseNode@1
   displayName: 'Use Node.js'
   inputs:
-    versionSpec: '16.x'  # Specify the Node.js version here
+    versionSpec: '18.x'  # Specify Node.js version here
 
-- task: Npm@1
-  displayName: 'Run npm ci'
-  inputs:
-    verbose: true  # Enable verbose logging for more details
-    workingDirectory: 'mslearn-tailspin-spacegame-web'  # Directory where package-lock.json is located
-    custom: 'ci'
+- script: |
+    rm -rf node_modules
+    npm cache clean --force
+    npm ci
+  displayName: 'Clean npm cache and install'
 
-- script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
+- script: 'npx sass Tailspin.SpaceGame.Web/wwwroot --no-source-map --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
