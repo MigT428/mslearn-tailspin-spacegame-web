@@ -18,12 +18,7 @@ steps:
   displayName: 'Use Node.js'
   inputs:
     versionSpec: '16.x'
-
-- task: Npm@1
-  displayName: 'Run npm install'
-  inputs:
-    verbose: true
-
+    
 - script: 'npx sass Tailspin.SpaceGame.Web/wwwroot --no-source-map'
   displayName: 'Compile Sass assets'
 
